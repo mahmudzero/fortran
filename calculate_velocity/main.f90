@@ -13,9 +13,13 @@ program calculate_velocity
     integer :: initial_velocty = 10000
     integer :: current_velocity = 10000
     integer :: time = 0
+    open (9, file = "output", status = "new")
+    write(9, '(A)') "time, velocity"
     do while (abs(current_velocity) < initial_velocty .OR. time .EQ. 0)
         current_velocity = apply_linear_acceleration(1, current_velocity, -9810)
         time = time + 1
         print*, "time: ", time, " current_velocity: ", current_velocity
+        write(9,'(I0, A, I0)') time, ", ", current_velocity
     end do
+    close(9)
 end program calculate_velocity
